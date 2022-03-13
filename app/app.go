@@ -5,13 +5,14 @@ import (
 	"log"
 	"os"
 
+	"github.com/goava/di"
 	"github.com/urfave/cli/v2"
 
 	"sc-wrap/config"
 )
 
 // NewApp returns an application.
-func NewApp(ctx context.Context, cfg *config.Config) *cli.App {
+func NewApp(ctx context.Context, cfg *config.Config, dic *di.Container) *cli.App {
 	cli.VersionFlag = &cli.BoolFlag{
 		Name:    "version",
 		Aliases: []string{"ver"},
@@ -32,7 +33,7 @@ func NewApp(ctx context.Context, cfg *config.Config) *cli.App {
 
 	// register commands into cli application
 	initCommand(cfg, app)
-	startCommand(ctx, cfg, app)
+	startCommand(ctx, cfg, app, dic)
 
 	return app
 }
