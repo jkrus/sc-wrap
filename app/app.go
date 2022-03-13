@@ -11,7 +11,7 @@ import (
 )
 
 // NewApp returns an application.
-func NewApp() *cli.App {
+func NewApp(ctx context.Context, cfg *config.Config) *cli.App {
 	cli.VersionFlag = &cli.BoolFlag{
 		Name:    "version",
 		Aliases: []string{"ver"},
@@ -29,6 +29,10 @@ func NewApp() *cli.App {
 			}
 		},
 	}
+
+	// register commands into cli application
+	initCommand(cfg, app)
+	startCommand(ctx, cfg, app)
 
 	return app
 }

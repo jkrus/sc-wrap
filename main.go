@@ -6,6 +6,7 @@ import (
 	"github.com/goava/di"
 
 	"sc-wrap/app"
+	"sc-wrap/config"
 )
 
 func main() {
@@ -14,6 +15,8 @@ func main() {
 		di.Provide(app.NewApp),
 		// provide the application's context.
 		di.Provide(app.NewContext),
+		// provide the application config.
+		di.Provide(config.NewConfig),
 	)
 
 	if err != nil {
