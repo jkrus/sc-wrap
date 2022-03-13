@@ -11,7 +11,9 @@ import (
 
 type (
 	// Config represents the main app's configuration.
-	Config struct{}
+	Config struct {
+		PathIPC string `yaml:"path-ipc"`
+	}
 )
 
 // NewConfig constructs an empty configuration.
@@ -50,4 +52,6 @@ func (c *Config) Load() error {
 	return nil
 }
 
-func (c *Config) setDefault() {}
+func (c *Config) setDefault() {
+	c.PathIPC = "IBFT-Network/Node-0/data/geth.ipc"
+}
